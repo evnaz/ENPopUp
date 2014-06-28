@@ -1,16 +1,14 @@
-ENPopUp
-=======
+#ENPopUp
+
 An UIViewController category to display any view controller in a modal popup.
 
-Demo
--------
+##Demo
 ![](http://i.imgur.com/5bEyYGL.gif)
 
 
-Usage
--------
+##Usage
 Import the category 
-    `#import "UIViewController+ENPopUp.h"`
+    #import "UIViewController+ENPopUp.h"
 then use
     `[self presentPopUpViewController:popUpViewController];`
 to dismiss the popup, use
