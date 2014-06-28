@@ -7,6 +7,7 @@
 //
 
 #import "ENViewController.h"
+#import "UIViewController+ENPopUp.h"
 
 @interface ENViewController ()
 
@@ -24,6 +25,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)showPopUp:(id)sender
+{
+    UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"PopUp"];
+    vc.view.frame = CGRectMake(0, 0, 270.0f, 230.0f);
+    [self presentPopUpViewController:vc];
 }
 
 @end

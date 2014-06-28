@@ -22,6 +22,9 @@
 		5C11312B195EB09300798E8A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C11310A195EB09200798E8A /* UIKit.framework */; };
 		5C113133195EB09300798E8A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C113131195EB09300798E8A /* InfoPlist.strings */; };
 		5C113135195EB09300798E8A /* ENPopUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C113134195EB09300798E8A /* ENPopUpTests.m */; };
+		5C113145195EBC6900798E8A /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C113144195EBC6900798E8A /* UIViewController+ENPopUp.m */; };
+		5C113148195EC85900798E8A /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C113147195EC85900798E8A /* JWBlurView.m */; };
+		5C11314A195EDAFA00798E8A /* z_df5fb1e0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C113149195EDAFA00798E8A /* z_df5fb1e0.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,11 @@
 		5C113130195EB09300798E8A /* ENPopUpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ENPopUpTests-Info.plist"; sourceTree = "<group>"; };
 		5C113132195EB09300798E8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5C113134195EB09300798E8A /* ENPopUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ENPopUpTests.m; sourceTree = "<group>"; };
+		5C113143195EBC6900798E8A /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
+		5C113144195EBC6900798E8A /* UIViewController+ENPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ENPopUp.m"; sourceTree = "<group>"; };
+		5C113146195EC85900798E8A /* JWBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWBlurView.h; sourceTree = "<group>"; };
+		5C113147195EC85900798E8A /* JWBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWBlurView.m; sourceTree = "<group>"; };
+		5C113149195EDAFA00798E8A /* z_df5fb1e0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = z_df5fb1e0.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,10 +124,15 @@
 			children = (
 				5C113115195EB09200798E8A /* ENAppDelegate.h */,
 				5C113116195EB09200798E8A /* ENAppDelegate.m */,
-				5C113118195EB09200798E8A /* Main_iPhone.storyboard */,
-				5C11311B195EB09200798E8A /* Main_iPad.storyboard */,
 				5C11311E195EB09200798E8A /* ENViewController.h */,
 				5C11311F195EB09200798E8A /* ENViewController.m */,
+				5C113143195EBC6900798E8A /* UIViewController+ENPopUp.h */,
+				5C113144195EBC6900798E8A /* UIViewController+ENPopUp.m */,
+				5C113146195EC85900798E8A /* JWBlurView.h */,
+				5C113147195EC85900798E8A /* JWBlurView.m */,
+				5C113149195EDAFA00798E8A /* z_df5fb1e0.png */,
+				5C113118195EB09200798E8A /* Main_iPhone.storyboard */,
+				5C11311B195EB09200798E8A /* Main_iPad.storyboard */,
 				5C113121195EB09200798E8A /* Images.xcassets */,
 				5C11310D195EB09200798E8A /* Supporting Files */,
 			);
@@ -236,6 +249,7 @@
 				5C113122195EB09200798E8A /* Images.xcassets in Resources */,
 				5C11311A195EB09200798E8A /* Main_iPhone.storyboard in Resources */,
 				5C113111195EB09200798E8A /* InfoPlist.strings in Resources */,
+				5C11314A195EDAFA00798E8A /* z_df5fb1e0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,9 +268,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C113148195EC85900798E8A /* JWBlurView.m in Sources */,
 				5C113120195EB09200798E8A /* ENViewController.m in Sources */,
 				5C113113195EB09200798E8A /* main.m in Sources */,
 				5C113117195EB09200798E8A /* ENAppDelegate.m in Sources */,
+				5C113145195EBC6900798E8A /* UIViewController+ENPopUp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

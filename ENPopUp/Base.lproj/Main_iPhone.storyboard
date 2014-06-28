@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ENViewController" sceneMemberID="viewController">
@@ -15,13 +15,87 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="z_df5fb1e0.png" translatesAutoresizingMaskIntoConstraints="NO" id="OvB-Vi-Zow">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmC-1U-wrl">
+                                <rect key="frame" x="109" y="505" width="103" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Show pop up">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showPopUp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QW3-4T-gzl"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="bmC-1U-wrl" secondAttribute="centerX" id="Lnt-Ib-cX4"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="bmC-1U-wrl" secondAttribute="bottom" constant="30" id="Olj-CB-KbA"/>
+                            <constraint firstItem="OvB-Vi-Zow" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="PcD-hF-bfA"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="OvB-Vi-Zow" secondAttribute="bottom" id="REe-UT-gY7"/>
+                            <constraint firstAttribute="trailing" secondItem="OvB-Vi-Zow" secondAttribute="trailing" id="XeL-Vh-PbD"/>
+                            <constraint firstItem="OvB-Vi-Zow" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="q01-iA-kHC"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="495" y="122"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rcc-U3-GTZ">
+            <objects>
+                <viewController storyboardIdentifier="PopUp" id="JC2-61-rmJ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DqE-XL-m2r"/>
+                        <viewControllerLayoutGuide type="bottom" id="qMs-hz-qbG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Db5-jP-XJh">
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="230"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PopUp view" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYN-DE-sII">
+                                <rect key="frame" x="89" y="85" width="93" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on background for disappear " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecU-Q6-JsR">
+                                <rect key="frame" x="33" y="114" width="204" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="zYN-DE-sII" secondAttribute="centerX" id="fuw-px-Dnf"/>
+                            <constraint firstItem="ecU-Q6-JsR" firstAttribute="top" secondItem="zYN-DE-sII" secondAttribute="bottom" constant="8" id="krZ-Al-1Br"/>
+                            <constraint firstAttribute="centerY" secondItem="zYN-DE-sII" secondAttribute="centerY" constant="20" id="pUs-sn-aDP"/>
+                            <constraint firstAttribute="centerX" secondItem="ecU-Q6-JsR" secondAttribute="centerX" id="rLM-eA-8jY"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1IH-1X-we4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="856" y="276"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="z_df5fb1e0.png" width="640" height="959"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
