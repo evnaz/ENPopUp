@@ -7,9 +7,9 @@ An UIViewController category to display any view controller in a modal popup.
 
 
 ##Usage
-Import the category 
-    #import "UIViewController+ENPopUp.h"
-then use
-    `[self presentPopUpViewController:popUpViewController];`
-to dismiss the popup, use
-    `[self dismissPopUpViewController];`
+Import the category <br />
+    #import "UIViewController+ENPopUp.h" <br />
+then use <br />
+    `[self presentPopUpViewController:popUpViewController];` <br />
+to dismiss the popup, use <br />
+    `[self dismissPopUpViewController];` <br />
