@@ -8,6 +8,9 @@
 
 #import "UIViewController+ENPopUp.h"
 #import "JWBlurView.h"
+#import <objc/runtime.h>
+
+static void * ENPopupViewControllerPropertyKey = &ENPopupViewControllerPropertyKey;
 
 static CGFloat const kAnimationDuration = .4f;
 static CGFloat const kRotationAngle = 70.f;
@@ -21,6 +24,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 #pragma mark - Public Methods
 - (void)presentPopUpViewController:(UIViewController *)popupViewController
 {
+    self.en_popupViewController = popupViewController;
     [self presentPopUpView:popupViewController.view];
 }
 
@@ -28,6 +32,19 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 {
     [self dismissingAnimation];
 }
+
+#pragma mark - Getters & Setters
+- (UIViewController *)en_popupViewController
+{
+    return objc_getAssociatedObject(self, ENPopupViewControllerPropertyKey);
+}
+
+- (void)setEn_popupViewController:(UIViewController *)en_popupViewController
+{
+    objc_setAssociatedObject(self, ENPopupViewControllerPropertyKey, en_popupViewController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+}
+
 
 #pragma mark - View Handling
 - (void)presentPopUpView:(UIView *)popUpView
@@ -105,10 +122,13 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     transform = CATransform3DIdentity;
     [UIView animateWithDuration:kAnimationDuration
                      animations:^ {
+                         [self.en_popupViewController viewWillAppear:NO];
                          [[self bluredView] setAlpha:1.f];
                          [self popUpView].layer.transform   = transform;
                      }
-                     completion:nil];
+                     completion:^(BOOL finished) {
+                         [self.en_popupViewController viewDidAppear:NO];
+                     }];
 }
 
 
@@ -117,6 +137,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     CATransform3D transform = [self transform3d];
     [UIView animateWithDuration:kAnimationDuration
                      animations:^ {
+                         [self.en_popupViewController viewWillDisappear:NO];
                          [[self bluredView] setAlpha:0.f];
                          [self popUpView].layer.transform   = transform;
                      }
@@ -124,6 +145,8 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
                          [[self popUpView] removeFromSuperview];
                          [[self bluredView]  removeFromSuperview];
                          [[self overlayView]  removeFromSuperview];
+                         [self.en_popupViewController viewDidDisappear:NO];
+                         self.en_popupViewController = nil;
                      }];
 }
 

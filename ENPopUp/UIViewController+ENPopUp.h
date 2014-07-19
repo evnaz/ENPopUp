@@ -10,6 +10,7 @@
 
 @interface UIViewController (ENPopUp)
 
+@property (nonatomic, retain) UIViewController *en_popupViewController;
 - (void)presentPopUpViewController:(UIViewController *)popupViewController;
 - (void)dismissPopUpViewController;
 
