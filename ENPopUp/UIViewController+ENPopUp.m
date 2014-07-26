@@ -30,7 +30,11 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 
 - (void)dismissPopUpViewController
 {
-    [self dismissingAnimation];
+    UIView *sourceView = [self topView];
+    JWBlurView *blurView = (JWBlurView *)[sourceView viewWithTag:kENPopUpBluredViewTag];
+    UIView *popupView = [sourceView viewWithTag:kENPopUpViewTag];
+    UIView *overlayView = [sourceView viewWithTag:kENPopUpOverlayViewTag];
+    [self performDismissAnimationInSourceView:sourceView withBlurView:blurView popupView:popupView overlayView:overlayView];
 }
 
 #pragma mark - Getters & Setters
@@ -45,12 +49,10 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 
 }
 
-
 #pragma mark - View Handling
 - (void)presentPopUpView:(UIView *)popUpView
 {
     UIView *sourceView = [self topView];
-    
     // Check if source view controller is not in destination
     if ([sourceView.subviews containsObject:popUpView]) return;
     
@@ -61,7 +63,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     overlayView.backgroundColor = [UIColor clearColor];
     
     // Add Blured View
-    JWBlurView *bluredView = [[JWBlurView alloc] initWithFrame:self.view.bounds];
+    JWBlurView *bluredView = [[JWBlurView alloc] initWithFrame:overlayView.bounds];
     bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     bluredView.tag = kENPopUpBluredViewTag;
     [bluredView setBlurAlpha:.0f];
@@ -93,7 +95,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     [sourceView addSubview:overlayView];
 
     [self setAnimationStateFrom:popUpView];
-    [self appearingAnimation];
+    [self performAppearAnimationWithBlurView:bluredView popupView:popUpView];
 }
 
 
@@ -115,7 +117,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     return CATransform3DConcat(transform, scale);
 }
 
-- (void)appearingAnimation
+- (void)performAppearAnimationWithBlurView:(JWBlurView *)blurView popupView:(UIView *)popupView
 {
     
     CATransform3D transform;
@@ -123,8 +125,8 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     [UIView animateWithDuration:kAnimationDuration
                      animations:^ {
                          [self.en_popupViewController viewWillAppear:NO];
-                         [[self bluredView] setAlpha:1.f];
-                         [self popUpView].layer.transform   = transform;
+                         [blurView setAlpha:1.f];
+                         popupView.layer.transform = transform;
                      }
                      completion:^(BOOL finished) {
                          [self.en_popupViewController viewDidAppear:NO];
@@ -132,39 +134,28 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 }
 
 
-- (void)dismissingAnimation
+- (void)performDismissAnimationInSourceView:(UIView *)sourceView
+                               withBlurView:(JWBlurView *)blurView
+                                  popupView:(UIView *)popupView
+                                overlayView:(UIView *)overlayView
 {
     CATransform3D transform = [self transform3d];
     [UIView animateWithDuration:kAnimationDuration
                      animations:^ {
                          [self.en_popupViewController viewWillDisappear:NO];
-                         [[self bluredView] setAlpha:0.f];
-                         [self popUpView].layer.transform   = transform;
+                         [blurView setAlpha:0.f];
+                         popupView.layer.transform = transform;
                      }
                      completion:^(BOOL finished) {
-                         [[self popUpView] removeFromSuperview];
-                         [[self bluredView]  removeFromSuperview];
-                         [[self overlayView]  removeFromSuperview];
+                         [popupView removeFromSuperview];
+                         [blurView  removeFromSuperview];
+                         [overlayView  removeFromSuperview];
                          [self.en_popupViewController viewDidDisappear:NO];
                          self.en_popupViewController = nil;
                      }];
 }
 
 #pragma mark - Getters
-- (UIView *)popUpView
-{
-    return [self.view viewWithTag:kENPopUpViewTag];
-}
-
-- (UIView *)overlayView
-{
-    return [self.view viewWithTag:kENPopUpOverlayViewTag];
-}
-
-- (JWBlurView *)bluredView
-{
-    return (JWBlurView *)[self.view viewWithTag:kENPopUpBluredViewTag];
-}
 
 - (UIView*)topView {
     UIViewController *recentView = self;
