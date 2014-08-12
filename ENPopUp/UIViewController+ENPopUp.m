@@ -24,17 +24,27 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 #pragma mark - Public Methods
 - (void)presentPopUpViewController:(UIViewController *)popupViewController
 {
+	[self presentPopUpViewController:popupViewController completion:nil];
+}
+
+- (void)presentPopUpViewController:(UIViewController *)popupViewController completion:(void (^)(void))completionBlock
+{
     self.en_popupViewController = popupViewController;
-    [self presentPopUpView:popupViewController.view];
+    [self presentPopUpView:popupViewController.view completion:completionBlock];
 }
 
 - (void)dismissPopUpViewController
+{
+	[self dismissPopUpViewControllerWithcompletion:nil];
+}
+
+- (void)dismissPopUpViewControllerWithcompletion:(void (^)(void))completionBlock
 {
     UIView *sourceView = [self topView];
     JWBlurView *blurView = (JWBlurView *)[sourceView viewWithTag:kENPopUpBluredViewTag];
     UIView *popupView = [sourceView viewWithTag:kENPopUpViewTag];
     UIView *overlayView = [sourceView viewWithTag:kENPopUpOverlayViewTag];
-    [self performDismissAnimationInSourceView:sourceView withBlurView:blurView popupView:popupView overlayView:overlayView];
+    [self performDismissAnimationInSourceView:sourceView withBlurView:blurView popupView:popupView overlayView:overlayView completion:completionBlock];
 }
 
 #pragma mark - Getters & Setters
@@ -50,7 +60,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 }
 
 #pragma mark - View Handling
-- (void)presentPopUpView:(UIView *)popUpView
+- (void)presentPopUpView:(UIView *)popUpView completion:(void (^)(void))completionBlock
 {
     UIView *sourceView = [self topView];
     // Check if source view controller is not in destination
@@ -95,7 +105,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     [sourceView addSubview:overlayView];
 
     [self setAnimationStateFrom:popUpView];
-    [self performAppearAnimationWithBlurView:bluredView popupView:popUpView];
+    [self performAppearAnimationWithBlurView:bluredView popupView:popUpView completion:completionBlock];
 }
 
 
@@ -117,7 +127,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     return CATransform3DConcat(transform, scale);
 }
 
-- (void)performAppearAnimationWithBlurView:(JWBlurView *)blurView popupView:(UIView *)popupView
+- (void)performAppearAnimationWithBlurView:(JWBlurView *)blurView popupView:(UIView *)popupView completion:(void (^)(void))completionBlock
 {
     
     CATransform3D transform;
@@ -130,6 +140,9 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
                      }
                      completion:^(BOOL finished) {
                          [self.en_popupViewController viewDidAppear:NO];
+						 if (completionBlock != nil) {
+							 completionBlock();
+						 }
                      }];
 }
 
@@ -138,6 +151,7 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
                                withBlurView:(JWBlurView *)blurView
                                   popupView:(UIView *)popupView
                                 overlayView:(UIView *)overlayView
+								 completion:(void (^)(void))completionBlock
 {
     CATransform3D transform = [self transform3d];
     [UIView animateWithDuration:kAnimationDuration
@@ -152,6 +166,9 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
                          [overlayView  removeFromSuperview];
                          [self.en_popupViewController viewDidDisappear:NO];
                          self.en_popupViewController = nil;
+						 if (completionBlock != nil) {
+							 completionBlock();
+						 }
                      }];
 }
 
